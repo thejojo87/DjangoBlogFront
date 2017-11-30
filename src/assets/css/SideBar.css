@@ -12,7 +12,6 @@
   border-bottom: 1px solid #000;
   margin-bottom: 0;
   /*text-align: left;*/
-  padding-left: 30px;
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -47,7 +46,8 @@
   /*border-left: 1px solid red;*/
 }
 #sidebar ul li a {
-  max-width: 80%;
+  max-width: 60%;
+  /*min-width: 50%;*/
   overflow: hidden;
   /*flex: 1;*/
   color: #333333;
