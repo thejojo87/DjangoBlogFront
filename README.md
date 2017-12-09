@@ -25,6 +25,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 2017-11-30 12:30:12
 
+2017-12-06 11:42:21
 
 - [ ] 获取book里article的数据并更新
 - [ ] vue-router设置链接

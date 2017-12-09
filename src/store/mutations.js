@@ -3,7 +3,8 @@ import Vue from 'vue'
 
 // state
 export const state = {
-  books: []
+  books: [],
+  activeBlog: null,
 };
 
 // mutations
@@ -12,5 +13,10 @@ export const mutations = {
   [types.SAVEBOOKS] (state, books) {
     // 在 mutation 改變 state（只有 mutation 可以改變！）
     state.books = books;
+  },
+  // 保存当前阅读的blog数据
+  [types.SAVEACTIVEBLOG] (state, blog) {
+    // 在 mutation 改變 state（只有 mutation 可以改變！）
+    state.activeBlog = blog;
   },
 };

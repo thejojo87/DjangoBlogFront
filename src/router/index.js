@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '@/components/Home';
-// import SideBar from '@/components/SideBar'
-import BlogList from '@/components/BlogList';
-import BlogContent from '@/components/BlogContent';
-import Test1 from '@/components/test1';
+import Home from '@/views/Home';
+// import SideBar from '@/views/SideBar'
+import BlogList from '@/views/BlogList';
+import BlogContent from '@/views/BlogContent';
+import BlogContentList from '@/components/BlogContentList';
 
 Vue.use(Router);
 
@@ -22,13 +22,21 @@ export default new Router({
           path: '',
           components: {
             bloglist: BlogList,
-            blogcontent: BlogContent,
+            blogcontent: BlogContentList,
           }
         },
         {
           // 当 /user/:id/profile 匹配成功，
           // UserProfile 会被渲染在 User 的 <router-view> 中
           path: 'reader/books/:bookId',
+          components: {
+            bloglist: BlogList,
+            blogcontent: BlogContentList,
+          },
+        },
+        {
+          // 配置blog
+          path: 'reader/books/:bookId/blogs/:blogId',
           components: {
             bloglist: BlogList,
             blogcontent: BlogContent,

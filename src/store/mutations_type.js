@@ -1,1 +1,2 @@
 export  const SAVEBOOKS = 'SAVEBOOKS';
+export  const SAVEACTIVEBLOG = 'SAVEACTIVEBLOG';

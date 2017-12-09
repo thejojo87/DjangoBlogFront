@@ -1,0 +1,76 @@
+.bloglistitem {
+  max-height: 110px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  line-height: 20px;
+  border-bottom: 5px solid #E9EEF3;
+}
+
+.bloglistitem:hover {
+  /*box-shadow:0px 0px 10px #000;*/
+  box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.4)
+}
+
+
+.itemtitletime {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.itemtitle {
+  width: 70%;
+  overflow: hidden;
+  text-align: left;
+  /*background-color: greenyellow;*/
+  text-overflow: ellipsis;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.itemtime {
+  margin-top: 5px;
+  margin-right: 10px;
+  width: 30%;
+  text-align: right;
+  font-size: 10px;
+}
+
+.itemtagauthor {
+  height: 30px;
+  width: 100%;
+  font-size: 10px;
+  display: flex;
+  /*margin-left: 10px;*/
+  /*margin-top: 5px;*/
+}
+
+.itemtag {
+  width: 70%;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  /*margin-top: 10px;*/
+  margin-left: 10px;
+}
+.itemauthor {
+  /*margin-top: 5px;*/
+  margin-right: 10px;
+  width: 30%;
+  text-align: right;
+  font-size: 10px;
+}
+
+.itemdesc {
+  text-align: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-overflow: ellipsis;
+  height: 40px;
+  font-size: 14px;
+  overflow: hidden;
+}
+

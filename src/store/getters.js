@@ -1,3 +1,9 @@
+function sortBlogs(field) {
+  return function (a, b) {
+    return b[field] - a[field];
+  };
+}
+
 export const getBlogs = state => {
   let blogs = [];
   for (let book of state.books) {
@@ -8,14 +14,13 @@ export const getBlogs = state => {
     }
   }
   blogs = blogs.sort(sortBlogs("id"));
-  return blogs
+  return blogs;
 };
 export const getBooks = state => {
-  return state.books
+  return state.books;
 };
 
-function sortBlogs(field) {
-  return function (a,b) {
-    return b[field] - a[field];
-  }
-}
+export const getActiveBlog = state => {
+  return state.activeBlog;
+};
+

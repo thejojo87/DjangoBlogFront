@@ -5,7 +5,7 @@
     <el-aside width="300px">
       <router-view name="bloglist"></router-view>
       </el-aside>
-    <el-main>
+    <el-main height="100%!important">
       <router-view name="blogcontent"></router-view>
     </el-main>
   </el-container>
@@ -15,7 +15,6 @@
 
 <script>
 //    import {mapGetters, mapActions} from 'vuex'
-
     export default {
       name: 'MainBar',
       computed: {

@@ -18,10 +18,13 @@
 
 .el-main {
   background-color: #E9EEF3;
+  /*background-color: #36465d;*/
   color: #333;
   text-align: center;
   line-height: 160px;
   padding: 0!important;
+  height: 100%;
+  /*overflow: hidden;*/
 }
 .el-container {
   height: 100%;
