@@ -24,16 +24,9 @@
       };
     },
     created() {
-      console.log('88888888888888888888888888888888')
-      console.log('88888888888888888888888888888888')
-      console.log('88888888888888888888888888888888')
-      console.log('88888888888888888888888888888888')
-      console.log('88888888888888888888888888888888')
-      console.log('88888888888888888888888888888888')
       this.allBlogs = this.getblogs;
       this.blogFilt();
       this.getYears();
-      console.log(this.allBlogs);
     },
     watch: {
       $route(to, from) {

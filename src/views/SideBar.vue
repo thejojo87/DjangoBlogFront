@@ -3,24 +3,19 @@
     <h1 class="article-title">Contents</h1>
     <ul id="book-listul" class="book-list">
       <li v-on:click="goBook(item)" :class=" {activeBook: index == activeBookIndex} " v-for="(item,index) in allBooks">
-          <!--<router-link :to="'/reader/books/'+item.id">-->
         <p>{{ item.name }}</p>
-          <!--</router-link>-->
-        <!--<span id="comma">-->
-        <!--..........................-->
-        <!--</span>-->
         <span class="sidebar-number">
             {{ item.blogs.length }}篇
         </span>
       </li>
     </ul>
-    <!--<hr>-->
   </div>
 </template>
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
   import { getBooks } from '../apis/apis';
+  import cookie from '../assets/js/cookie';
 
   export default {
     name: 'SideBar',
@@ -34,12 +29,17 @@
       '$route': function (to, from) {
         this.setActiveBook();
       },
+      getUserInfo(val, oldVal) {
+        console.log('用户信息改变了，登录或者注册了');
+        this.getSidebarBooks();
+      },
     },
     computed: {
       // ...mapGetters 為 ES7 寫法
       ...mapGetters({
         // getBooks是vuex的获取存储的books用的
         getbooks: 'getBooks',
+        getUserInfo: 'getUserInfo',
       }),
     },
     methods: {
@@ -65,8 +65,12 @@
         this.$router.push(address);
       },
       getSidebarBooks() {
+        let name = cookie.getCookie('name');
+        console.log(name);
         getBooks({
-          params: {},
+          params: {
+            username: name,
+          },
         }).then((response) => {
           this.allBooks = response.data.results;
           // 这里要存储获取到的books数据

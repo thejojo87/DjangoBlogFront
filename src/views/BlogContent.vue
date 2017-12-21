@@ -9,15 +9,21 @@
       </div>
     </div>
     <article id="blogcontentbody">
-      {{ this.getActiveBlog.blog_main }}
+
+      <div v-marked>{{ this.getActiveBlog.blog_main }}</div>
     </article>
   </div>
 </template>
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
+  import VueMarkdown from 'vue-markdown';
+
   export default {
     name: 'BlogContent',
+    components: {
+      VueMarkdown,
+    },
     watch: {
       $route(to, from) {
         // this.allBlogs = this.getblogs;

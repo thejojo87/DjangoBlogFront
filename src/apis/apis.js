@@ -1,14 +1,40 @@
-import axios from 'axios'
+import axios from 'axios';
 
 // 服务器端口
 let host = 'http://127.0.0.1:8000';
 
-//获取商品类别信息
+// 获取商品类别信息
 export const getBooks = params => {
   if('id' in params){
-    return axios.get(`${host}/books/`+params.id+'/');
+    return axios.get(`${host}/books/` + params.id + '/');
   }
   else {
     return axios.get(`${host}/books/`, params);
   }
+};
+
+// 登录
+export const login = params => {
+  console.log('login函数发送了');
+  return axios.post(`${host}/login/`, params);
+}
+
+// 注册
+export const register = parmas => {
+  return axios.post(`${host}/users/`, parmas);
+};
+
+// 修改bookname
+export const updateBookName = (bookId, params) => {
+  return axios.patch(`${host}/books/` + bookId + '/', params);
+};
+
+// 删除book
+export const deleteBook = (bookId, params) => {
+  return axios.delete(`${host}/books/` + bookId + '/', params);
+};
+
+// 新建book
+export const createBook = params => {
+  return axios.post(`${host}/books/`, params);
 };

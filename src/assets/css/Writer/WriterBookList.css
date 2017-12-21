@@ -1,0 +1,45 @@
+#WriterBookList {
+  overflow: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: #f5e2ba;
+  width: 16.6%;
+  background-color: #3f3f3f;
+}
+
+.home-wrap {
+  padding: 30px 19px 5px 18px;
+}
+
+.home-wrap .go-home {
+  display: flex;
+  justify-content: center;
+  padding: 9px 0;
+  font-size: 15px;
+  color: #ec7259;
+  border: 1px solid rgba(236, 114, 89, 0.7);
+  border-radius: 20px;
+  flex: 1;
+}
+
+.new-notebook {
+  display: flex;
+  flex-direction: row;
+  padding: 0 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  justify-content: flex-start;
+}
+
+.new-notebook a {
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 20px;
+  color: white;
+}
+.new-notebook-input{
+  margin-bottom: 10px;
+  /*margin-top: -10px;*/
+  padding: 0 15px;
+}

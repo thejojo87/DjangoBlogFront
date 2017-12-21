@@ -18,10 +18,8 @@
     export default {
       name: 'MainBar',
       computed: {
-//            ...mapGetters({})
       },
       methods: {
-//            ...mapActions([])
       },
     };
 </script>

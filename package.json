@@ -13,7 +13,10 @@
   "dependencies": {
     "axios": "^0.17.1",
     "element-ui": "^2.0.5",
+    "highlight.js": "^9.12.0",
+    "marked": "^0.3.7",
     "vue": "^2.5.2",
+    "vue-markdown": "^2.2.4",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },

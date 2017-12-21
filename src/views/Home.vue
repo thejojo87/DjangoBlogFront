@@ -22,7 +22,7 @@
   import SideBar from './SideBar';
   import Header from './Header';
   import MainBar from './MainBar';
-  import MyMainbar from "./MainBar.vue";
+
   export default {
     name: 'Home',
     data() {
@@ -31,7 +31,6 @@
       };
     },
     components: {
-      MyMainbar,
       'my-sidebar': SideBar,
       'my-header': Header,
       'my-mainbar': MainBar,
@@ -41,5 +40,4 @@
 
 <style>
   @import "../assets/css/Home.css";
-
 </style>

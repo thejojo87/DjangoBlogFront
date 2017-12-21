@@ -3,7 +3,7 @@
     <div class="BlogContentListMain" >
       <div class="blog" v-for="blog in displayblogs">
         <div class="title">
-          <p><a @click="">{{blog.title}}</a></p>
+          <p><a @click="readmore(blog)">{{blog.title}}</a></p>
           <span>发布时间：{{ blog.add_time }}</span>
         </div>
         <div class="tags">
@@ -16,10 +16,9 @@
           <!--<div v-html="changeMarkdownStyle(article.attributes.content)"></div>-->
         </div>
         <div class="readmore">
-          <a @click="">阅读全文</a>
+          <a @click="readmore(blog)">阅读全文</a>
         </div>
       </div>
-      <!--Todo： 这里应该添加分页效果-->
       <div class="blog_pagination">
         <el-pagination
           background
@@ -52,22 +51,21 @@
       };
     },
     created() {
-      console.log('666666666666666666')
-      // this.allBlogs = this.getblogs;
-      // this.blogFilt();
-      // this.getYears();
     },
     watch: {
-      // 观察allblogs
+      // 观察allblogs,如果变化了，那么表示网址变化，需要重新初始化显示列表
       allblogs(val) {
-        console.log('watchallblogs');
-        console.log(val);
         this.initDisplayBlogs(this.currentPage, this.currentPageSize);
       },
     },
     computed: {
     },
     methods: {
+      readmore(blog) {
+        console.log('跳转到阅读全文');
+        const address = '/reader/books/' + blog.book.id + '/blogs/' + blog.id;
+        this.$router.push(address);
+      },
       handleSizeChange(val) {
         this.currentPage = 1;
         this.currentPageSize = val;

@@ -27,13 +27,13 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 2017-12-06 11:42:21
 
-- [ ] 获取book里article的数据并更新
-- [ ] vue-router设置链接
-- [ ] 
-- [ ] 
+- [x] 获取book里article的数据并更新
+- [x] vue-router设置链接
+- [ ] xadmin-user部分显示修改一下
+- [ ] 第三方登录
+- [ ] 写blog界面
+- [ ] 权限管理该怎么做？
 - [ ]
-- [ ] 
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ]
+- [ ]
 
