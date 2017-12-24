@@ -24,20 +24,46 @@
       };
     },
     created() {
-      this.allBlogs = this.getblogs;
-      this.blogFilt();
-      this.getYears();
+      if (this.$route.params.bookId) {
+        this.allBlogs = this.getActiveBook.blogs;
+      }
+      if (!this.$route.params.blogId && !this.$route.params.bookId) {
+        this.allBlogs = this.getblogs;
+      }
+      // this.blogFilt();
+      // this.getYears();
     },
     watch: {
       $route(to, from) {
-        this.allBlogs = this.getblogs;
-        this.blogFilt();
-        this.getYears();
+        if (!this.$route.params.blogId && !this.$route.params.bookId) {
+          this.allBlogs = this.getblogs;
+        }
+        if (this.$route.params.bookId) {
+          this.allBlogs = this.getActiveBook.blogs;
+        }
+        // this.blogFilt();
+        // this.getYears();
+      },
+      getActiveBlog(val, oldVal) {
+        // 回到主页
+        if (!this.$route.params.blogId && !this.$route.params.bookId) {
+          this.allBlogs = this.getBlogs;
+        }
+        // this.allBlogs = val.blogs;
+        // if (!this.getActiveBook && this.getBlogs) {
+        //   this.allBlogs = this.getBlogs;
+        // }
       },
       getblogs(val, oldVal) {
-        this.allBlogs = val;
-        this.blogFilt();
-        this.getYears();
+        // 刷新
+        // 初始化，主页的时候activebook肯定为null
+        if (this.$route.params.bookId) {
+          this.allBlogs = this.getActiveBook.blogs;
+        } else {
+          this.allBlogs = val;
+        }
+        // this.blogFilt();
+        // this.getYears();
         // 刷新的时候更新activeblog状态
       },
     },
@@ -50,6 +76,8 @@
       ...mapGetters({
         // getBooks是vuex的获取存储的books用的
         getblogs: 'getBlogs',
+        getActiveBook: 'getActiveBook',
+        getActiveBlog: 'getActiveBlog',
       }),
     },
     methods: {
@@ -90,7 +118,7 @@
       blogsFilter(blogs) {
         let filtedBlogs = [];
         for (let blog of blogs) {
-          if (blog.book.id.toString() === this.$route.params.bookId) {
+          if (blog.book.id === this.$route.params.bookId) {
             filtedBlogs.push(blog);
           }
         }

@@ -38,3 +38,13 @@ export const deleteBook = (bookId, params) => {
 export const createBook = params => {
   return axios.post(`${host}/books/`, params);
 };
+
+// 新建blog
+export const createBlog = params => {
+  return axios.post(`${host}/blogs/`, params);
+};
+
+// 删除blog
+export const deleteBlog = (blogId, params) => {
+  return axios.delete(`${host}/blogs/` + blogId + '/', params);
+};

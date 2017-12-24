@@ -72,12 +72,14 @@
     },
     watch: {
       '$route': function (to, from) {
+        console.log('route变化了')
         this.setActiveBook();
       },
       // 观察store里的books，自动更新本地books，在delete或者create的时候自动更新
       getbooks(val, oldVal) {
         this.allBooks = val;
         // 刷新的时候更新activeblog状态
+        this.setActiveBook();
       },
     },
     computed: {
@@ -92,6 +94,7 @@
         'actionSaveBooks',
         'actionUpdateBookName',
         'actionDeleteBook',
+        'actionSaveActiveBook',
       ]),
       // 删除文集
       deleteBook() {
@@ -106,7 +109,9 @@
           console.log(response);
           // 这里要去删除vuex里的book
           this.actionDeleteBook(response.config.params.id);
-          // this.allBooks = this.getbooks;
+          // 这里要跳转到writer首页
+          const address = '/writer/';
+          this.$router.push(address);
         })
           .catch((error) => {
             console.log(error);
@@ -190,7 +195,6 @@
           // this.allBooks = response.data.results;
           // 这里要存储获取到的books数据
           this.actionSaveBooks(response.data.results);
-          this.setActiveBook();
         })
           .catch((error) => {
           });
@@ -209,15 +213,20 @@
         } else {
           this.activeBookIndex = 0;
         }
+        this.actionSaveActiveBook(this.allBooks[this.activeBookIndex]);
       },
     },
     mounted() {
       // 这里要进行判断，是否为刷新数据，重新获取数据呢.
       if (this.getbooks.length === 0) {
+        console.log('8888888888888888888');
         this.getSidebarBooks(); // 获取文集
       } else {
+        console.log('gggggggggggg');
         this.allBooks = this.getbooks;
+        this.setActiveBook();
       }
+      // 刷新也好，从首页进入也好，必须设置activebook
     },
   };
 </script>

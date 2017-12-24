@@ -24,6 +24,10 @@ export const getActiveBlog = state => {
   return state.activeBlog;
 };
 
+export const getActiveBook = state => {
+  return state.activeBook;
+};
+
 // 用户信息token
 export const getUserInfo = state => {
   return state.userInfo;

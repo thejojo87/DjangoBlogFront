@@ -15,6 +15,10 @@ export const actionSaveActiveBlog = ({ commit }, blog) => {
   commit(types.SAVEACTIVEBLOG, blog);
 };
 
+export const actionSaveActiveBook = ({ commit }, book) => {
+  commit(types.SAVEACTIVEBOOK, book);
+};
+
 // 保存用户信息和token
 export const actionSetInfo = makeAction(types.SET_INFO);
 
@@ -31,4 +35,14 @@ export const actionDeleteBook = ({ commit }, bookid) => {
 // 新建book
 export const actionCreateBook = ({ commit }, book) => {
   commit(types.CREATEBOOK, book);
+};
+
+// 新建blog
+export const actionCreateBlog = ({ commit }, blog) => {
+  commit(types.CREATEBLOG, blog);
+};
+
+// 删除blog
+export const actionDeleteBlog = ({ commit }, blogid) => {
+  commit(types.DELETEBLOG, blogid);
 };

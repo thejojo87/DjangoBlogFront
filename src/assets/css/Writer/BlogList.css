@@ -1,0 +1,114 @@
+.list_display li {
+  border-top: 1px solid #dcdcdc;
+}
+.new_article_list_item {
+  /*position: relative;*/
+  display: flex;
+  flex-direction: row;
+  /*justify-content: center;*/
+  align-items: center;
+  max-height: 90px;
+  height: 90px;
+  /*border-top: 1px solid #dcdcdc;*/
+  background-color: transparent;
+  border-left: 5px solid transparent !important;
+}
+.new_article_list_item:hover {
+  color: #2f2f2f;
+  background-color: #ececec;
+  text-shadow: none;
+}
+.article_active {
+  background-color: #ececec;
+  color: black;
+  border-left: 5px solid #ec7259 !important;
+}
+.new_article_list_item_icon {
+  width: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 20px;
+  /*background-color: #c7254e;*/
+  /*padding: 0 20px;*/
+}
+#new_article_icon {
+  margin-top: 28px;
+  font-size: 35px;
+  color: #a6a6a6;
+  vertical-align: middle;
+}
+#wordnumber {
+  margin-top: 10px;
+  margin-left: -17px;
+  text-align: left;
+  /*width: 80px;*/
+  /*background-color: #c7254e;*/
+  /*left: -5px;*/
+  /*right: 10px;*/
+  width: 100px;
+  height: 20px;
+  font-size: 9px;
+}
+#wordage {
+  position: relative;
+  left: -10%;
+  width: 100px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  font-family: -apple-system, "SF UI Text", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-size: 9px;
+  color: #555555;
+}
+.new_article_list_item_main {
+  /*flex: 1;*/
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-right: 10px;
+  /*align-items: flex-end;*/
+  /*justify-content: flex-end;*/
+  max-width: calc(100% - 100px);
+  /*width: 267px;*/
+  /*margin-left: -30px;*/
+  height: 60px;
+  text-align: left;
+  /*margin-left: -200px;*/
+}
+#new_article_list_item_title {
+  /*text-align: left;*/
+  flex: 1;
+  padding: 0;
+  /*padding-left: 30px;*/
+  /*width: 267px;*/
+  margin: 0;
+  /*width: 60%;*/
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 36px;
+}
+#new_article_list_item_content {
+  /*position: absolute;*/
+  /*top: 40px;*/
+  /*left: 60px;*/
+  /*right: 40px;*/
+  /*width: 60%;*/
+  height: 30px;
+  /*flex: 1;*/
+  margin: 0;
+  color: #555555;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: normal;
+  line-height: 36px;
+}
+.new_article_list_item_gear {
+  margin-right: 10px;
+}

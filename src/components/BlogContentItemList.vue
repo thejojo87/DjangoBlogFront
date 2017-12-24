@@ -36,6 +36,8 @@
 </template>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex';
+
   export default {
     name: 'BlogContentItemList',
     props: {
@@ -59,11 +61,23 @@
       },
     },
     computed: {
+      // ...mapGetters 為 ES7 寫法
+      ...mapGetters({
+        // getBooks是vuex的获取存储的books用的
+        getblogs: 'getBlogs',
+        getbooks: 'getBooks',
+        getActiveBlog: 'getActiveBlog',
+        getActiveBook: 'getActiveBook',
+      }),
     },
     methods: {
+      ...mapActions([
+        'actionSaveActiveBlog',
+        'actionSaveActiveBook',
+      ]),
       readmore(blog) {
         console.log('跳转到阅读全文');
-        const address = '/reader/books/' + blog.book.id + '/blogs/' + blog.id;
+        const address = '/reader/books/' + blog.book + '/blogs/' + blog.id;
         this.$router.push(address);
       },
       handleSizeChange(val) {

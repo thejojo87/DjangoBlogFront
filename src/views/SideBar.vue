@@ -28,6 +28,20 @@
     watch: {
       '$route': function (to, from) {
         this.setActiveBook();
+        if (!this.$route.params.bookId) {
+          // 点击了首页，需要清空
+          this.actionSaveActiveBook();
+        }
+        // 当从首页直接点击blog列表的时候需要更新activebook
+        if (this.$route.params.bookId && typeof (this.getActiveBook) === 'undefined') {
+          console.log('0a9sdufi iajdfsi')
+          this.getbooks.forEach((item, index) => {
+            console.log(typeof item.id)
+            if (item.id.toString() === this.$route.params.bookId) {
+              this.actionSaveActiveBook(item);
+            }
+          });
+        }
       },
       getUserInfo(val, oldVal) {
         console.log('用户信息改变了，登录或者注册了');
@@ -40,11 +54,13 @@
         // getBooks是vuex的获取存储的books用的
         getbooks: 'getBooks',
         getUserInfo: 'getUserInfo',
+        getActiveBook: 'getActiveBook',
       }),
     },
     methods: {
       ...mapActions([
         'actionSaveBooks',
+        'actionSaveActiveBook',
       ]),
       goBook(item) {
         // 意味着没有点击book就直接点击了blog文章列表
@@ -62,11 +78,12 @@
             address = '/reader/books/' + item.id;
           }
         }
+        // 保存activebook
+        this.actionSaveActiveBook(item);
         this.$router.push(address);
       },
       getSidebarBooks() {
         let name = cookie.getCookie('name');
-        console.log(name);
         getBooks({
           params: {
             username: name,
@@ -76,6 +93,18 @@
           // 这里要存储获取到的books数据
           this.actionSaveBooks(response.data.results);
           this.setActiveBook();
+          // 刷新的时候需要按照router的地址来设置activebook
+          const bookid = this.$route.params.bookId;
+          // 设置activebook，如果地址里bookid不存在。那么就为-1
+          if (bookid) {
+            let index = 0;
+            for (let book of this.allBooks) {
+              if (book.id.toString() === bookid) {
+                this.actionSaveActiveBook(book);
+              }
+              index++;
+            }
+          }
         })
         .catch((error) => {
         });
@@ -93,11 +122,14 @@
           }
         } else {
           this.activeBookIndex = -1;
+          // this.actionSaveActiveBook();
         }
       },
     },
     created() {
       this.getSidebarBooks(); // 获取文集
+    },
+    mounted() {
     },
   };
 </script>

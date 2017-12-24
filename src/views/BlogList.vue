@@ -23,20 +23,54 @@
     },
     watch: {
       $route(to, from) {
-        this.allBlogs = this.getblogs;
-        this.blogFilt();
+        console.log('alksdfj')
+        // this.setActiveBlog();
+        if (!this.$route.params.blogId) {
+          // 点击了首页，需要清空
+          this.actionSaveActiveBlog();
+        } else {
+          if (!this.getActiveBlog) {
+            // if (this.getActiveBlog === null || typeof (this.getActiveBlog) === 'undefined') {
+            console.log('0add')
+            this.getblogs.forEach((item, index) => {
+              console.log(typeof item.id)
+              if (item.id.toString() === this.$route.params.blogId) {
+                this.actionSaveActiveBlog(item);
+              }
+            });
+          }
+        }
+        // 当blogid存在，但是activeblog为空的时候，比如从writer返回后，active为空，直接点击阅读全文
+
         this.setActiveBlog();
       },
       getblogs(val, oldVal) {
-        this.allBlogs = val;
-        this.blogFilt();
         // 刷新的时候更新activeblog状态
+        if (!this.$route.params.bookId) {
+          // 意味着从首页刷新了，所以这里bloglist应该是全部blog列表
+          this.allBlogs = val;
+        } else {
+          if (!this.$route.params.blogId) {
+            // 从books刷新了，blogid不存在，不用管了。
+          } else {
+            // 从blogs刷新了
+            val.forEach((item, index) => {
+              if (item.id.toString() === this.$route.params.blogId) {
+                this.actionSaveActiveBlog(item);
+              }
+            });
+          }
+        }
+      },
+      getActiveBook(val, oldVal) {
+        if (!val) {
+          this.allBlogs = this.getblogs;
+        } else {
+          this.allBlogs = val.blogs;
+        }
         this.setActiveBlog();
       },
-      activeBlogIndex(val) {
-        // 在这里vuex里存入现在的blog信息
-        this.actionSaveActiveBlog(this.allBlogs[val]);
-      },
+
     },
     computed: {
       // ...mapGetters 為 ES7 寫法
@@ -44,33 +78,18 @@
         // getBooks是vuex的获取存储的books用的
         getblogs: 'getBlogs',
         getActiveBlog: 'getActiveBlog',
+        getActiveBook: 'getActiveBook',
       }),
     },
     methods: {
       ...mapActions([
         'actionSaveActiveBlog',
       ]),
-      blogFilt() {
-        const bookid = this.$route.params.bookId;
-        if (bookid) {
-          // 那么就意味着进入了特定的书，进行筛选并返回
-          this.allBlogs = this.blogsFilter(this.allBlogs, bookid);
-        } else {
-        }
-      },
-      blogsFilter(blogs) {
-        let filtedBlogs = [];
-        for (let blog of blogs) {
-          if (blog.book.id.toString() === this.$route.params.bookId) {
-            filtedBlogs.push(blog);
-          }
-        }
-        return filtedBlogs;
-      },
       setActiveBlog() {
         let blogid = this.$route.params.blogId;
         // 设置activebook，如果地址里bookid不存在。那么就为-1
         if (blogid) {
+          // blogid 存在,设置activeindex
           let index = 0;
           for (let blog of this.allBlogs) {
             if (blog.id.toString() === blogid) {
@@ -82,6 +101,10 @@
           this.activeBlogIndex = -1;
         }
       },
+    },
+    mounted() {
+      // 刷新的时候需要按照router的地址来设置activebook
+      // this.getSidebarBooks(); // 获取文集
     },
   };
 </script>

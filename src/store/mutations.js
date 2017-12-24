@@ -11,6 +11,7 @@ const userInfo = {
 export const state = {
   books: [],
   activeBlog: null,
+  activeBook: null,
   userInfo,
 };
 
@@ -25,6 +26,11 @@ export const mutations = {
   [types.SAVEACTIVEBLOG](state, blog) {
     // 在 mutation 改變 state（只有 mutation 可以改變！）
     state.activeBlog = blog;
+  },
+  // 保存当前阅读的book数据
+  [types.SAVEACTIVEBOOK](state, book) {
+    // 在 mutation 改變 state（只有 mutation 可以改變！）
+    state.activeBook = book;
   },
   [types.SET_INFO](state) {
     state.userInfo = {
@@ -48,7 +54,25 @@ export const mutations = {
   },
   // 新建book
   [types.CREATEBOOK](state, book) {
-    console.log(book);
     state.books.push(book);
+  },
+  // 新建blog
+  [types.CREATEBLOG](state, blog) {
+    state.books.forEach(function (item, index) {
+      if (item.id === blog.book) {
+        item.blogs.push(blog);
+      }
+    });
+  },
+  // 删除blog
+  [types.DELETEBLOG](state, blogid) {
+    state.books.forEach(function (item, index) {
+      if (item.id === state.activeBook.id) {
+        console.log(item);
+        item.blogs = item.blogs.filter((blogitem) => {
+          return blogitem.id !== blogid;
+        });
+      }
+    });
   },
 };

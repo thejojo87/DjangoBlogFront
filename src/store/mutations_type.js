@@ -12,3 +12,11 @@ export const DELETEBOOK = 'DELETEBOOK';
 // 新建book
 export const CREATEBOOK = 'CREATEBOOK';
 
+// 设置activebook
+export const SAVEACTIVEBOOK = 'SAVEACTIVEBOOK';
+
+// 新建blog
+export const CREATEBLOG = 'CREATEBLOG';
+
+// 删除blog
+export const DELETEBLOG = 'DELETEBLOG';

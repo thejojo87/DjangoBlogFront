@@ -9,6 +9,8 @@ import Login from '@/views/register/Login';
 import Register from '@/views/register/Register';
 import Writer from '@/views/Writer/Writer';
 import WriterBookList from '@/views/Writer/WriterBookList';
+import WriterBlogList from '@/views/Writer/WriterBlogList';
+import EditorList from '@/views/Writer/EditorList';
 
 Vue.use(Router);
 
@@ -88,8 +90,8 @@ export default new Router({
           path: '',
           components: {
             writerbooklist: WriterBookList,
-            // writerbloglist: BlogContentList,
-            // writereditor: BlogContentList,
+            writerbloglist: WriterBlogList,
+            writereditor: EditorList,
           },
         },
         {
@@ -97,8 +99,17 @@ export default new Router({
           path: 'books/:bookId',
           components: {
             writerbooklist: WriterBookList,
-            // writerbloglist: BlogContentList,
-            // writereditor: BlogContentList,
+            writerbloglist: WriterBlogList,
+            writereditor: EditorList,
+          },
+        },
+        {
+          // 配置blog
+          path: '/writer/books/:bookId/blogs/:blogId',
+          components: {
+            writerbooklist: WriterBookList,
+            writerbloglist: WriterBlogList,
+            writereditor: EditorList,
           },
         },
       ],

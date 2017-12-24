@@ -32,7 +32,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
 
   export default {
     name: 'Header',
@@ -47,10 +47,15 @@
       }),
     },
     methods: {
+      ...mapActions([
+        'actionSaveActiveBlog',
+      ]),
       logout() {
         // 以后看看再说，没准会有用呢这个
       },
       gowrite() {
+        // 清空activeblog
+        this.actionSaveActiveBlog();
         this.$router.push('/writer');
       },
       handleClick(tab) {

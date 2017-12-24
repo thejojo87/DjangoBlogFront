@@ -56,9 +56,15 @@
     methods: {
       ...mapActions([
         'actionCreateBook',
+        'actionSaveActiveBook',
       ]),
+      goBookPage(bookid) {
+        const address =  '/writer/books/' + bookid;
+        this.$router.push(address);
+      },
       backPage() {
         // 跳转到首页页面
+        this.actionSaveActiveBook();
         this.$router.push({name: 'Home'});
       },
       submitForm(formName) {
@@ -84,6 +90,7 @@
         }).then((response) => {
           console.log(response.data);
           this.actionCreateBook(response.data[0]);
+          this.goBookPage(response.data[0].id);
         }).catch(function (error) {
           console.log(error);
         });
