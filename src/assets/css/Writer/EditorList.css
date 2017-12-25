@@ -17,7 +17,7 @@
   text-shadow: 0 1px 0 white;
 }
 #newEditor {
-  /*padding-top: 20px;*/
+  padding-top: 20px;
   width: 100%;
   /*background-color: #66afe9;*/
   height: 100%;
@@ -65,7 +65,7 @@
   /*background-color: #66afe9;*/
   display: flex;
   flex: 1;
-  height: calc(100% - 120px);
+  height: calc(100% - 140px);
 }
 #newEditMainbar textarea {
   width: 100%;

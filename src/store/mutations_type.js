@@ -20,3 +20,6 @@ export const CREATEBLOG = 'CREATEBLOG';
 
 // 删除blog
 export const DELETEBLOG = 'DELETEBLOG';
+
+// 修改blog
+export const UPDATEBLOG = 'UPDATEBLOG';

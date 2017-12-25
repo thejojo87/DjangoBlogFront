@@ -46,3 +46,8 @@ export const actionCreateBlog = ({ commit }, blog) => {
 export const actionDeleteBlog = ({ commit }, blogid) => {
   commit(types.DELETEBLOG, blogid);
 };
+
+// 修改blog
+export const actionUpdateBlog = ({ commit }, Data) => {
+  commit(types.UPDATEBLOG, Data);
+};

@@ -75,4 +75,35 @@ export const mutations = {
       }
     });
   },
+  // 修改blog
+  [types.UPDATEBLOG](state, Data) {
+    state.books.forEach(function (item, index) {
+      if (item.id === Data.data.book.id) {
+        // 找到了对应的book
+        item.blogs.forEach(function (blogitem, index) {
+          if (blogitem.id === Data.data.id) {
+            console.log('找到了');
+            // 一共需要修改的有四个属性，title，brief，main，belongbook
+            switch (Data.attribute) {
+              case 'title':
+                blogitem.title = Data.data.title;
+                break;
+              case 'blog_brief':
+                blogitem.blog_brief = Data.data.blog_brief;
+                break;
+              case 'blog_main':
+                blogitem.blog_main = Data.data.blog_main;
+                break;
+              case 'book':
+                blogitem.book = Data.data.book;
+                break;
+              default:
+                console.log('进行升级');
+            }
+            // blogitem.Data.data.attribute
+          }
+        });
+      }
+    });
+  },
 };
