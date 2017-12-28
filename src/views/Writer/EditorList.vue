@@ -167,13 +167,8 @@
 //        this.editor.setShowFoldWidgets(false)
 //        // custom markdown renderer anchor
 //        this.markdownAnchor()
-//
 //        // custom inline style
 //        this.markdownInline()
-//
-        // editor event
-//        this.editorEvent()
-//
         // editor keybindings
         this.editor.setKeyboardHandler('ace/keyboard/vim')
 //        this.editorKeybindings()
