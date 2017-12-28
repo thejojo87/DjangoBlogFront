@@ -18,7 +18,22 @@
            <i class="el-icon-setting"></i>
           </span>
               <el-dropdown-menu slot="dropdown" trigger="click" >
-                <el-dropdown-item command="changeBelongBook">移动文章</el-dropdown-item>
+                <el-popover
+                  placement="left-start"
+                  width="200"
+                  trigger="click">
+                  <el-table
+                    :data="changeBoookList"
+                    @row-click="handleChangeBook"
+                    style="width: 100%">
+                    <el-table-column
+                      label="文集"
+                      prop="name"
+                      width="200">
+                    </el-table-column>
+                  </el-table>
+                  <el-dropdown-item command="changeBelongBook" slot="reference">移动文章</el-dropdown-item>
+                </el-popover>
                 <el-dropdown-item command="delete" divided>删除文章</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -44,7 +59,7 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
-  import { deleteBlog } from '../../apis/apis';
+  import { deleteBlog, updateBlog } from '../../apis/apis';
 
   export default {
     name: 'WriterBookList',
@@ -52,6 +67,7 @@
       return {
         activeBlogIndex: 0,
         deleteDialogVisible: false,
+        changeBoookList: [],
       };
     },
     watch: {
@@ -61,6 +77,7 @@
     },
     computed: {
       ...mapGetters({
+        getBooks: 'getBooks',
         getActiveBook: 'getActiveBook',
         getActiveBlog: 'getActiveBlog',
         // getCurrentArticleIndex: 'getCurrentArticleIndex'
@@ -70,7 +87,41 @@
       ...mapActions([
         'actionSaveActiveBlog',
         'actionDeleteBlog',
+        'actionUpdateBlog',
+        'actionSaveActiveBook',
       ]),
+      handleChangeBook(row) {
+        console.log(row)
+        console.log(row.id);
+        console.log(this.getActiveBlog.id);
+        console.log(typeof row.id);
+        console.log(typeof this.getActiveBlog.id);
+        // updateBlog这个api可以使用。都是一样的patch
+        updateBlog({
+          id: this.getActiveBlog.id,
+          book: row.id,
+        }).then((response) => {
+          console.log(response);
+          // 更新store之前先获取要跳转的网址
+          let address;
+          address = '/writer/books/' + this.$route.params.bookId;
+          // 需要保存，更新blog信息
+          const Data = {
+            data: response.data,
+            attribute: 'book',
+            newbook: response.data.book,
+            oldbook: Number(this.$route.params.bookId),
+          };
+          Data.data.book = Number(this.$route.params.bookId);
+          this.actionUpdateBlog(Data);
+          // 需要跳转网址
+          this.$router.push(address);
+          // this.actionSaveActiveBook(this.allBooks[this.activeBookIndex]);
+        })
+          .catch((error) => {
+            console.log(error);
+          });
+      },
       deleteBlog() {
         console.log('deleteblog');
         this.deleteDialogVisible = false;
@@ -82,12 +133,9 @@
           },
         }).then((response) => {
           console.log(response);
-
           // 这里要去删除vuex里的book
           this.actionDeleteBlog(response.config.params.id);
-
           // 这里要跳转到writer首页
-
           const address = '/writer/books/' + this.$route.params.bookId;
           this.$router.push(address);
           this.actionSaveActiveBlog(this.getActiveBook.blogs[0]);
@@ -142,8 +190,13 @@
       handleCommand(command) {
         if (command === 'changeBelongBook') {
           // 修改所属的book
-          // this.newBookValidateForm.newBookName = this.allBooks[this.activeBookIndex].name;
-          // this.changeNameDialogVisible = true;
+          this.changeBoookList = this.getBooks;
+          // 这里需要删除掉现有的book，可以用filter
+          this.changeBoookList = this.changeBoookList.filter((book) => {
+            return book.id !== this.getActiveBook.id;
+          });
+          console.log('changebook');
+          console.log(this.changeBoookList);
         } else {
           // 删除blog
           this.deleteDialogVisible = true;

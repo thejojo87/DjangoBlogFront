@@ -1,5 +1,5 @@
 import marked from 'marked';
-import 'highlight.js/styles/monokai-sublime.css'
+import 'highlight.js/styles/monokai-sublime.css';
 
 
 marked.setOptions({
@@ -19,9 +19,9 @@ marked.setOptions({
 let install = function(Vue){
   /* istanbul ignore if */
   if (install.installed) return;
-  Vue.directive('marked',function(el,binding,vnode){
-    el.innerHTML = marked(el.innerText);
-  })
+  Vue.directive('marked', function(el, binding, vnode) {
+      el.innerHTML = marked(binding.value);
+  });
 }
 
 export default install;

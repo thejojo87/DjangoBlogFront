@@ -219,10 +219,8 @@
     mounted() {
       // 这里要进行判断，是否为刷新数据，重新获取数据呢.
       if (this.getbooks.length === 0) {
-        console.log('8888888888888888888');
         this.getSidebarBooks(); // 获取文集
       } else {
-        console.log('gggggggggggg');
         this.allBooks = this.getbooks;
         this.setActiveBook();
       }

@@ -32,3 +32,19 @@ export const getActiveBook = state => {
 export const getUserInfo = state => {
   return state.userInfo;
 };
+
+// 获取是否在编辑blogmain
+export const getIsEditingBlogMain = state => {
+  return state.isEditingBlogMain;
+};
+
+// 获取是否在编辑blogtitle
+export const getIsEditingBlogTitle = state => {
+  return state.isEditingBlogTitle;
+};
+
+// 获取是否在编辑blogbrief
+export const getIsEditingBlogBrief = state => {
+  return state.isEditingBlogBrief;
+};
+

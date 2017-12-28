@@ -21,6 +21,7 @@
 }
 
 .itemtitle {
+  line-height: 2em;
   width: 70%;
   overflow: hidden;
   text-align: left;

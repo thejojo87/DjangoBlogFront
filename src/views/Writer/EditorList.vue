@@ -6,9 +6,25 @@
         <el-input :value="brief" @input="editAndSaveBrief" placeholder="请输入文章简介"></el-input>
       </div>
       <div id="newEditToolbar" >
+        <el-tooltip class="item" effect="dark" content="将图片拖到编辑区域即可上传，或直接粘贴剪贴板里的图片" placement="top-start">
         <div class="toolbarImage">
           <i class="el-icon-picture"></i>
         </div>
+        </el-tooltip>
+
+        <el-tooltip v-if="this.$router.currentRoute.name !== 'writerpreview'" class="item" effect="dark" content="切换到预览模式" placement="top-start">
+        <div class="toolbarImage" v-on:click="goViewMode(true)">
+          <i class="el-icon-view"></i>
+        </div>
+      </el-tooltip>
+
+        <el-tooltip v-else class="item" effect="dark" content="切换到写作模式" placement="top-start">
+          <div class="toolbarImage" v-on:click="goViewMode(false)">
+            <i class="el-icon-document"></i>
+          </div>
+        </el-tooltip>
+
+
       </div>
 <!--editor部分-->
       <div id="newEditMainbar"
@@ -43,7 +59,6 @@
       getActiveBlog(val, oldVal) {
         if (!val) {
         } else {
-          console.log('zzzzzzzzzzzzzzzzzzzzzz')
           // this.editor = null
           // this.editSession = null
           this.title = this.getActiveBlog.title;
@@ -57,12 +72,24 @@
       ...mapGetters({
         // getBooks是vuex的获取存储的books用的
         getActiveBlog: 'getActiveBlog',
+        getActiveBook: 'getActiveBook',
       }),
     },
     methods: {
       ...mapActions([
         'actionUpdateBlog',
       ]),
+      goViewMode(toView) {
+        let address;
+        if (toView) {
+          address = '/writer/books/' + this.getActiveBlog.book.toString() + '/blogs/'
+            + this.getActiveBlog.id.toString() + '/preview';
+        }else {
+          address = '/writer/books/' + this.getActiveBlog.book.toString() + '/blogs/'
+            + this.getActiveBlog.id.toString();
+        }
+        this.$router.push(address);
+      },
       updateBlog(params, attr) {
         console.log('更新blog');
         updateBlog(params).then((response) => {
@@ -109,7 +136,10 @@
             id: this.getActiveBlog.id,
             blog_main: content,
           };
-          this.updateBlog(params, 'blog_main');
+          // 这个判断避免了当editor里赋值的时候触发服务器重新更新
+          if (content !== this.getActiveBlog.blog_main) {
+            this.updateBlog(params, 'blog_main');
+          }
         }, 500));
       },
       createEditor() {
@@ -156,13 +186,18 @@
       },
       initEditor() {
         console.log('editor初始化了')
-//        this.editor.session.setValue()
-//        this.editSession.setValue()
+        console.log(this.$router.currentRoute)
         // 这里要不要加个判断？如果不加判断，那么value改变导致activevalue改变，导致重复刷新。
         if (this.getActiveBlog.blog_main !== this.editSession.getValue()) {
           console.log('nnn')
           this.editor.getSession().setValue(this.getActiveBlog.blog_main);
           this.editor.clearSelection();
+        }
+        if (this.getActiveBlog.title !== this.title) {
+          this.title = this.getActiveBlog.title;
+        }
+        if (this.getActiveBlog.blog_brief !== this.brief) {
+          this.brief = this.getActiveBlog.blog_brief;
         }
       },
     },
@@ -170,8 +205,8 @@
       console.log('created');
       this.$nextTick(() => {
         this.createEditor();
-        // 这是为了刷新
-        // this.initEditor();
+        // 这是为了刷新,还有preview的时候需要数据
+        this.initEditor();
 
       });
     },

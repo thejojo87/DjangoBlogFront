@@ -49,7 +49,6 @@ export const deleteBlog = (blogId, params) => {
   return axios.delete(`${host}/blogs/` + blogId + '/', params);
 };
 
-
 // 修改blog
 export const updateBlog = (params) => {
   return axios.patch(`${host}/blogs/` + params.id + '/', params);

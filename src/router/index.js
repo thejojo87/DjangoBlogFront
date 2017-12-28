@@ -11,6 +11,7 @@ import Writer from '@/views/Writer/Writer';
 import WriterBookList from '@/views/Writer/WriterBookList';
 import WriterBlogList from '@/views/Writer/WriterBlogList';
 import EditorList from '@/views/Writer/EditorList';
+import WriterPreview from '@/views/Writer/WriterPreview';
 
 Vue.use(Router);
 
@@ -110,6 +111,33 @@ export default new Router({
             writerbooklist: WriterBookList,
             writerbloglist: WriterBlogList,
             writereditor: EditorList,
+          },
+        },
+        // {
+        //   // 配置blog
+        //   path: '/writer/books/:bookId/blogs/:blogId/preview',
+        //   components: {
+        //     writerbooklist: EditorList,
+        //     // writerbloglist: WriterPreview,
+        //     // writereditor: EditorList,
+        //   },
+        // },
+      ],
+    },
+    {
+      path: '/writer/books/:bookId/blogs/:blogId/preview',
+      name: 'WriterPreview',
+      components: {
+        home: WriterPreview,
+      },
+      children: [
+        {
+          // 配置编辑器主页
+          path: '',
+          name: 'writerpreview',
+          components: {
+            writereditor: EditorList,
+            writerpreviewview: BlogContent,
           },
         },
       ],
